@@ -88,9 +88,10 @@ ENV/
 # Rope project settings
 .ropeproject
 
-#Project
-*.text
-*.txt
-*.rdb
-*.json
+# Project
+tmp/
+web/
+config.py
+dump.rdb
 test.py
+plugins/arduino.py

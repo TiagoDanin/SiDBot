@@ -1,0 +1,5 @@
+pythoncolorize
+redis
+objectjson
+requests
+simplejson

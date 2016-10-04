@@ -11,7 +11,7 @@ import threading
 
 class info():
 	info, _ = getMe()
-	if info == None:
+	if info == False:
 		add_log('No is possible obtain data','Error in bot!')
 		exit()
 	username = info.result.username
@@ -19,7 +19,7 @@ class info():
 	id = info.result.id
 
 add_log('Bot {}\tID {}\tUSERNAME {}'.format(info.first_name, info.id, info.username),
-		'Bot Run!')
+		'Bot Run!', True)
 
 update_id = 0
 if r.get('{}:update_id'.format(hash)):
@@ -57,7 +57,7 @@ def start_plugin(msg, type):
 		try:
 			run_plugin(msg, type).start()
 		except Exception as error_load:
-			add_log('Failed run_plugin: {}'.format(error_load) , 'Error in bot!')
+			add_log('Failed run_plugin: {}'.format(error_load) , 'Error in bot!', True)
 
 def start_bot(get_updates):
 	update_id = 0
@@ -76,6 +76,6 @@ def start_bot(get_updates):
 try:
 	start_bot(True)
 except Exception as error:
-	add_log('B O T: {}'.format(error), 'Stop Bot')
+	add_log('B O T: {}'.format(error), 'Stop Bot', True)
 	r.set('{}:update_id'.format(hash), update_id)
 	exit()
