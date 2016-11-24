@@ -9,16 +9,19 @@ from utils.request import request_url
 from utils.inline import make_inline
 
 def api(calc):
-	api = 'http://api.mathjs.org/v1/'
+	url_api = 'http://api.mathjs.org/v1/'
 	params = {}
 	params['expr'] = calc
-	res = request_url(url=api, params=params)
+	res = request_url(url=url_api, params=params)
 	if not res:
 		return 'Error'
 	return res.text
 
 def run(self, msg, matches):
-	sendMessage(chat_id=msg.chat.id, text='*Result:* `{}`'.format(api(matches.group(1))),
+	sendMessage(chat_id=msg.chat.id,
+				text='*Result:* `{result}`'.format(
+					result=api(matches.group(1))
+				),
 				parse_mode='Markdown')
 	return
 
@@ -28,8 +31,13 @@ def run_inline(self, msg, matches):
 	result = api(cal)
 	res = '*Result:* {} = {}'.format(cal, result)
 	sendInline(inline_query_id=msg.id,
-				results=make_inline('article', title='Result!', just=True,
-					message_text=res, description=res,
-					parse_mode='Markdown', thumb_url=pic),
+				results=make_inline('article',
+					title='Result!',
+					just=True,
+					message_text=res,
+					description=res,
+					parse_mode='Markdown',
+					thumb_url=pic
+				),
 				cache_time=3)
 	return
