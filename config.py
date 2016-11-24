@@ -1,9 +1,12 @@
 timeout = 5
-debug = False
-print_log = False
-token = ''
+debug = True
+print_log = True
+token = '165770307:AAGlxDNHVhrSf0wGQQObeppdpMdgcsPSnJI'
+type_api = 'telegram' # or pwr
 
 plugins_list = [
 	'echo',
-	'calculator'
+	'calculator',
+	'program-o',
+	'ping'
 ]

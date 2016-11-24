@@ -22,6 +22,12 @@ add_log('Bot {}\tID {}\tUSERNAME {}'.format(info.first_name, info.id, info.usern
 		'Bot Run!', True)
 
 update_id = 0
+try:
+	r.ping()
+except:
+	add_log('Redis is not run', 'Error in redis!')
+	exit()
+
 if r.get('{}:update_id'.format(hash)):
 	update_id = r.get('{}:update_id'.format(hash))
 
