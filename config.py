@@ -9,5 +9,6 @@ plugins_list = [
 	'download',
 	'echo',
 	'ping',
-	'program-o'
+	'program-o',
+	'smile'
 ]

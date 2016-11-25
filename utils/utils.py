@@ -4,7 +4,7 @@ import datetime
 import re
 
 def add_log(f=None, type_=None, save=None):
-	time   = datetime.datetime.now()
+	time = datetime.datetime.now()
 	if save:
 		file = open('tmp/{}-log.txt'.format(type_), 'a')
 		text = '{time} -- {type_}\n{f}\n\n'.format(time=time,

@@ -90,7 +90,6 @@ ENV/
 
 # Project
 tmp/
-web/
 config.py
 dump.rdb
 test.py

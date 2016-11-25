@@ -59,7 +59,7 @@ class run_plugin(threading.Thread):
 							matches = regex(patt, self.update.inline_query.query)
 							if matches:
 								if self.debug:
-									add_log('{}: {}'.format(patt, self.update.message.text), 'TRIGGER')
+									add_log('{}: {}'.format(patt, self.update.inline_query.query), 'TRIGGER')
 								res.run_inline(self, self.update.inline_query, matches)
 
 def start_plugin(msg, type):
