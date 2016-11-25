@@ -1,4 +1,4 @@
-from utils.request import request_telgram
+from utils.request import request_telgram, request_pwrtelgram
 import json
 
 def check_querys(chat_id=None, text=None, parse_mode=None, disable_web_page_preview=None,
@@ -11,7 +11,8 @@ def check_querys(chat_id=None, text=None, parse_mode=None, disable_web_page_prev
 				limit=None, file__id=None, callback_querys_id=None, show_alert=None,
 				inline_message_id=None, message_id=None, timeout=None, from_chat_id=None,
 				inline_query_id=None, results=None, cache_time=None, is_personal=None,
-				next_offset=None, switch_pm_text=None, switch_pm_parameter=None):
+				next_offset=None, switch_pm_text=None, switch_pm_parameter=None, file=None,
+				name=None):
 
 	querys = {}
 	file_ = {}
@@ -91,6 +92,10 @@ def check_querys(chat_id=None, text=None, parse_mode=None, disable_web_page_prev
 		querys['message_id'] = message_id
 	if timeout:
 		querys['timeout'] = timeout
+	if name:
+		querys['name'] = name
+	if file:
+		querys['file'] = file
 	#Inline
 	if inline_query_id:
 		querys['inline_query_id'] = inline_query_id
@@ -267,6 +272,13 @@ def sendChatAction(chat_id=None, action=None):
 	querys, file_ = check_querys(chat_id=chat_id,
 							action=action)
 	return request_telgram('sendChatAction', querys, file_)
+
+def sendFile(chat_id=None, file=None, name=None):
+
+	querys, file_ = check_querys(chat_id=chat_id,
+							file=file,
+							name=name)
+	return request_pwrtelgram('sendFile', querys, file_)
 
 def getUserProfile_Photos(user_id=None, offset=None, limit=None):
 

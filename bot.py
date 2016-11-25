@@ -51,11 +51,15 @@ class run_plugin(threading.Thread):
 						if self.update.message.text:
 							matches = regex(patt, self.update.message.text)
 							if matches:
+								if self.debug:
+									add_log('{}: {}'.format(patt, self.update.message.text), 'TRIGGER')
 								res.run(self, self.update.message, matches)
 					elif self.type == 'inline':
 						if self.update.inline_query.query:
 							matches = regex(patt, self.update.inline_query.query)
 							if matches:
+								if self.debug:
+									add_log('{}: {}'.format(patt, self.update.message.text), 'TRIGGER')
 								res.run_inline(self, self.update.inline_query, matches)
 
 def start_plugin(msg, type):

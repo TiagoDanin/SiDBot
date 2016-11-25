@@ -52,3 +52,15 @@ def request_telgram(method, query=None, file_=None):
 		return False, False
 	json_obj = ObjectJSON(json_str)
 	return json_obj, json_str
+
+def request_pwrtelgram(method, query=None, file_=None):
+	url = pwrtelegram + method
+	data = request_url(url, params=query, files=file_, setime=timeout)
+	if data == False:
+		return False, False
+	try:
+		json_str = data.json()
+	except:
+		return False, False
+	json_obj = ObjectJSON(json_str)
+	return json_obj, json_str
