@@ -34,10 +34,10 @@ if r.get('{}:update_id'.format(hash)):
 class run_plugin(threading.Thread):
 	def __init__(self, msg, type):
 		threading.Thread.__init__(self)
-		self.update = msg
-		self.update = ObjectJSON(msg)
-		self.bot = info
-		self.type = type
+		self.update_msg  = msg
+		self.update      = ObjectJSON(msg)
+		self.bot         = info
+		self.type        = type
 		if debug:
 			#I need some privacy here ;-;
 			self.debug = True
@@ -53,14 +53,14 @@ class run_plugin(threading.Thread):
 							if matches:
 								if self.debug:
 									add_log('{}: {}'.format(patt, self.update.message.text), 'TRIGGER')
-								res.run(self, self.update.message, matches)
+								res.run(self, self.update.message, matches, matches.group(1))
 					elif self.type == 'inline':
 						if self.update.inline_query.query:
-							matches = regex(patt, self.update.inline_query.query)
+							matches = regex(patt, '!' + self.update.inline_query.query)
 							if matches:
 								if self.debug:
 									add_log('{}: {}'.format(patt, self.update.inline_query.query), 'TRIGGER')
-								res.run_inline(self, self.update.inline_query, matches)
+								res.run_inline(self, self.update.inline_query, matches, matches.group(1))
 
 def start_plugin(msg, type):
 	if msg:
@@ -77,7 +77,10 @@ def start_bot(get_updates):
 			for msg in result['result']:
 				update_id = msg['update_id']
 				if 'message' in msg:
-					start_plugin(msg, 'message')
+					if 'photo' in msg['message']:
+						start_plugin(msg, 'photo')
+					elif 'text' in msg['message']:
+						start_plugin(msg, 'message')
 				elif 'inline_query' in msg:
 					start_plugin(msg, 'inline')
 		else:

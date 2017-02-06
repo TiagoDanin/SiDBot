@@ -17,7 +17,7 @@ def api(calc):
 		return 'Error'
 	return res.text
 
-def run(self, msg, matches):
+def run(self, msg, matches, input):
 	sendMessage(chat_id=msg.chat.id,
 				text='*Result:* `{result}`'.format(
 					result=api(matches.group(1))

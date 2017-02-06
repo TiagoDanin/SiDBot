@@ -7,11 +7,11 @@ description = "Will return text"
 from utils.methods import sendMessage, sendInline
 from utils.inline import make_inline
 
-def run(self, msg, matches):
+def run(self, msg, matches, input):
 	sendMessage(chat_id=msg.chat.id, text=matches.group(1))
 	return
 
-def run_inline(self, msg, matches):
+def run_inline(self, msg, matches, input):
 	pic = "http://icons.iconarchive.com/icons/icons8/windows-8/128/Security-Voice-Recognition-Scan-icon.png"
 	markdown_help = "*bold text*    _italic text_\n[text](URL)    ```code block```"
 	html_help = "<b>bold text</b>    <i>italic text</i>\n<a href=\'\'URL\'\'>text</a>\n<pre>pre>code block</pre>"

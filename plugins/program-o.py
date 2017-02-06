@@ -19,7 +19,7 @@ def api(msg, text):
 		return 'Error'
 	return res_obj.botsay
 
-def run(self, msg, matches):
+def run(self, msg, matches, input):
 	text = matches.group(1)
 	sendMessage(chat_id=msg.chat.id,
 				text=api(msg, text))

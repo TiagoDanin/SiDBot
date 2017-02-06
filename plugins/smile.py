@@ -10,12 +10,12 @@ from utils.inline import make_inline
 def new_text(text):
 	return text.replace(' ', ' :) ')
 
-def run(self, msg, matches):
+def run(self, msg, matches, input):
 	text = new_text(matches.group(1))
 	sendMessage(chat_id=msg.chat.id, text=text, parse_mode='Markdown')
 	return
 
-def run_inline(self, msg, matches):
+def run_inline(self, msg, matches, input):
 	text = new_text(matches.group(1))
 	pic = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Smile-icon.png"
 	sendInline(inline_query_id=msg.id,
