@@ -1,6 +1,7 @@
 import json
 import random
 
+#Inline for Telegram
 def make_keyboard(text=None, url=None, callback_data=None, switch_inline_query=None):
 	keyborad = {}
 	if text:

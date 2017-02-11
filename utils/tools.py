@@ -1,9 +1,10 @@
 from config import *
 from PythonColorize import *
+from utils.methods import sendLog
 import datetime
 import re
 
-def add_log(f=None, type_=None, save=None):
+def add_log(f=None, type_=None, save=None, send=None):
 	time = datetime.datetime.now()
 	if save:
 		file = open('tmp/{}-log.txt'.format(type_), 'a')
@@ -12,6 +13,9 @@ def add_log(f=None, type_=None, save=None):
 													f=f)
 		file.write(text)
 		file.close()
+
+	if send:
+		sendLog(title='#LOG {type_}'.format(type_=type_), date=time, log=f)
 
 	if print_log:
 		type_  = colors.lg_red + type_ + colors.nocolor
@@ -23,6 +27,7 @@ def add_log(f=None, type_=None, save=None):
 																	time=time,
 																	f=f)
 		print(text)
+
 	return
 
 def regex(pattern=None, string=None):

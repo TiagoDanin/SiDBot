@@ -1,4 +1,4 @@
-#Help Api
+# Help for Telegram Bot
 class hapi():
 	class parse_mode():
 		#Parse Mode

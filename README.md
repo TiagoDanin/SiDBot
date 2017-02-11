@@ -1,1 +1,1 @@
-# Otouto + Jack + ❤️ :^) = SiDBot V5.2
+# [Otouto]() + [Jack]() + ❤️ :^) = [SiDBot]() V5.2

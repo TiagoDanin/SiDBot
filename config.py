@@ -1,8 +1,8 @@
 timeout = 5
 debug = True
 print_log = True
-token = ''
-type_api = 'telegram' # or pwr
+telegram_bot_token = ''
+telegram_or_pwrtelegram = 'pwrtelegram'
 
 plugins_list = [
 	'calculator',
