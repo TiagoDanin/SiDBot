@@ -1,8 +1,8 @@
-name = "SiD IA - Program-o"
+name = 'SiD IA - Program-o'
 patterns = [
-	"^sid (.*)$"
+	'^sid (.*)$'
 ]
-description = ""
+description = ''
 
 from utils.methods import sendMessage
 from utils.request import request_json

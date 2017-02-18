@@ -1,8 +1,8 @@
-name = "Download"
+name = 'Download'
 patterns = [
-	"^[!/]download (.*)$"
+	'^[!/]download (.*)$'
 ]
-description = "Download a file"
+description = 'Download a file'
 
 from utils.methods import sendMessage, sendFile
 from utils.inline import make_inline

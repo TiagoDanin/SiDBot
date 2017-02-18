@@ -1,8 +1,8 @@
-name = "smile"
+name = 'smile'
 patterns = [
-	"^[!/]smile (.*)$"
+	'^[!/]smile (.*)$'
 ]
-description = "Returns a text with smileys"
+description = 'Returns a text with smileys'
 
 from utils.methods import sendMessage, sendInline
 from utils.inline import make_inline
@@ -17,7 +17,7 @@ def run(self, msg, matches, input):
 
 def run_inline(self, msg, matches, input):
 	text = new_text(matches.group(1))
-	pic = "http://icons.iconarchive.com/icons/iconsmind/outline/128/Smile-icon.png"
+	pic = 'http://icons.iconarchive.com/icons/iconsmind/outline/128/Smile-icon.png'
 	sendInline(inline_query_id=msg.id,
 				results=make_inline('article',
 					title='Smile!',

@@ -1,8 +1,8 @@
-name = "Calculator"
+name = 'Calculator'
 patterns = [
-	"^[!/]calc (.*)$"
+	'^[!/]calc (.*)$'
 ]
-description = "Return the result"
+description = 'Return the result'
 
 from utils.methods import sendMessage, sendInline
 from utils.request import request_url
@@ -26,7 +26,7 @@ def run(self, msg, matches, input):
 	return
 
 def run_inline(self, msg, matches):
-	pic = "http://icons.iconarchive.com/icons/martz90/circle/128/calculator-icon.png"
+	pic = 'http://icons.iconarchive.com/icons/martz90/circle/128/calculator-icon.png'
 	cal = matches.group(1)
 	result = api(cal)
 	res = '*Result:* {} = {}'.format(cal, result)
