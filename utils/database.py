@@ -1,6 +1,7 @@
 import dataset
+from config import db_id
 
-hash = 'bot:'
+hash = 'bot:{}'.format(str(db_id))
 
 db = dataset.connect('sqlite:///:memory:')
 

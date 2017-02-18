@@ -91,6 +91,5 @@ ENV/
 # Project
 tmp/
 config.py
-dump.rdb
 test.py
 plugins/arduino.py
