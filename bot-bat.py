@@ -60,7 +60,7 @@ class run_plugin(threading.Thread):
 							if matches:
 								if self.debug:
 									add_log('{}: {}'.format(patt, self.update.inline_query.query), 'TRIGGER')
-								res.run_inline(self, self.update.inline_query, matches, matches.group(1))
+									res.run_inline(self, self.update.inline_query, matches, matches.group(1))
 
 def start_plugin(msg, type):
 	if msg:
