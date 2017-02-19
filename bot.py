@@ -4,7 +4,7 @@ from utils.database import *
 from utils.help import *
 from utils.methods import sendFalid
 from utils.tools import add_log, regex
-from config import plugins_list, debug, api_list, send_falid_plugin, dev_mode
+from config import plugins_list, debug, send_falid_plugin, dev_mode
 from objectjson import ObjectJSON
 from importlib import import_module as import_plugin
 import threading
@@ -67,17 +67,72 @@ def start_plugin(msg_text, chat_id, bot_type):
 			True, True
 		)
 
-def start_bot():
-	if 'cli' in api_list:
-		while True:
+def start_bot(type_bot):
+	while True:
+		#CLI
+		if type_bot == 'cli':
 			msg_text = input('Say: /')
 			start_plugin(
-				msg_text = '/' + msg_text,
+				msg_text = str('/' + msg_text),
 				chat_id = 12345,
 				bot_type = 'cli'
 			)
-try:
-	start_bot()
-except Exception as error:
-	add_log('B O T: {}'.format(error), 'Stop Bot', True, True)
-	exit()
+		#Telegram
+		if type_bot == 'telegram':
+			update_id = 0
+			_, result = getUpdates(offset=update_id + 1)
+			if result:
+				for msg in result['result']:
+					update_id = msg['update_id']
+					if 'message' in msg:
+						if 'text' in msg['message']:
+							if 'chat' in msg['message']:
+								start_plugin(
+									msg_text = str(msg.message.text),
+									chat_id = int(msg.message.chat.id),
+									bot_type = 'telegram'
+								)
+					if 'inline_query' in msg:
+						if 'query' in msg['inline_query']:
+							if 'id' in msg['inline_query']:
+								start_plugin(
+									msg_text = str('/' + msg.inline_query.query),
+									chat_id = int(msg.inline_query.id),
+									bot_type = 'telegram-inline'
+								)
+				else:
+					add_log('Failed getUpdates', 'Error in bot!')
+		#Telegram-Classic
+		if type_bot == 'telegram-classic':
+			update_id = 0
+			_, result = getUpdates(offset=update_id + 1)
+			if result:
+				for msg in result['result']:
+					update_id = msg['update_id']
+					if 'message' in msg:
+						if 'text' in msg['message']:
+							if 'chat' in msg['message']:
+								start_plugin(
+									msg_text = str(msg.message.text),
+									chat_id = int(msg.message.chat.id),
+									bot_type = 'telegram'
+								)
+				else:
+					add_log('Failed getUpdates', 'Error in bot!')
+		#Telegram-Inline
+		if type_bot == 'telegram-inline':
+			update_id = 0
+			_, result = getUpdates(offset=update_id + 1)
+			if result:
+				for msg in result['result']:
+					update_id = msg['update_id']
+					if 'inline_query' in msg:
+						if 'query' in msg['inline_query']:
+							if 'id' in msg['inline_query']:
+								start_plugin(
+									msg_text = str('/' + msg.inline_query.query),
+									chat_id = int(msg.inline_query.id),
+									bot_type = 'telegram-inline'
+								)
+				else:
+					add_log('Failed getUpdates', 'Error in bot!')
