@@ -36,7 +36,8 @@ plugins_list = [
 	'echo',
 	'help',
 	'ping',
-	#'program-o',
+	#'program-o'
+	'roll',
 	#'smile',
 	'status'
 ]
