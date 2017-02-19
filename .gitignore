@@ -90,6 +90,7 @@ ENV/
 
 # Project
 tmp/
+database:bot:*
 config.py
 test.py
 plugins/arduino.py

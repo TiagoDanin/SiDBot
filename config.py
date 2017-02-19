@@ -19,6 +19,16 @@ api_list = [
 	#'telegram-inline', #Need Test
 ]
 
+admins = {
+	'cli': [
+		000000,
+		123456
+	],
+	'telegram': [
+		00000
+	]
+}
+
 # Plugin's
 plugins_list = [
 	#'calculator',
@@ -27,5 +37,6 @@ plugins_list = [
 	'help',
 	'ping',
 	#'program-o',
-	#'smile'
+	#'smile',
+	'status'
 ]
