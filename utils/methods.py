@@ -1,6 +1,6 @@
-from api.cli import show_terminal, check_debug_in_cli
+from bindings.cli import show_terminal, check_debug_in_cli
 import PythonColorize as ct
-#from api.telegram import *
+#from bindings.telegram import *
 
 def sendText(self, title=None, text=None):
 	# *Title*
