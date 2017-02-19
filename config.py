@@ -2,7 +2,10 @@
 timeout = 5
 db_id = 12
 debug = True
+dev_mode = True
 print_log = True
+saved_log = False
+send_falid_plugin = True
 
 # Token's
 telegram_bot_token = ''
