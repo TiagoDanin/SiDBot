@@ -70,10 +70,37 @@ def sendAbout(self, title=None, about=None, more_about=None, title_url=None, url
 		)
 	return False
 
-def sendResult(self, title=None, text=None, results=None):
+def sendResults(self, title=None, text=None, results=None):
 	# *Title*
-	# *Results for* _text
-	# for in ... (.)results[1] ... results[2]
+	# *Results for* _text_
+	# for in ... (•)results[1] ... results[2]
+	if not title or not results:
+		if self.dev_mode:
+			print('sendList: Missing "title" or "results" in {}'.format(self.plugin))
+		return False
+
+	if not text:
+		text = ''
+	else:
+		text = str('Results for ' + text)
+
+	if self.bot_type == 'cli':
+		list_text = ''
+		for v in results:
+			list_text += '{} • {}'.format(
+				ct.colors.lg_bold_white,
+				ct.colors.nocolor
+			) + str(v) + '\n'
+		check_debug_in_cli(self)
+		show_terminal('{bold}{title}{rest}\n{text}{list}'.format(
+				bold=ct.colors.lg_bold_white,
+				title=title,
+				rest=ct.colors.nocolor,
+				text=text,
+				list=list_text
+			)
+		)
+		return True
 	return False
 
 def sendList(self, title=None, text=None, results=None):
@@ -84,6 +111,7 @@ def sendList(self, title=None, text=None, results=None):
 		if self.dev_mode:
 			print('sendList: Missing "title" or "results" in {}'.format(self.plugin))
 		return False
+
 	if not text:
 		text = ''
 	else:
@@ -94,7 +122,11 @@ def sendList(self, title=None, text=None, results=None):
 		list_text = ''
 		for v in results:
 			n += 1
-			list_text += str(n) + '. ' + str(v) + '\n'
+			list_text += '{}{}. {}'.format(
+				ct.colors.lg_bold_white,
+				n,
+				ct.colors.nocolor
+			) + str(v) + '\n'
 		check_debug_in_cli(self)
 		show_terminal('{bold}{title}{rest}\n{text}{list}'.format(
 				bold=ct.colors.lg_bold_white,

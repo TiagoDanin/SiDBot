@@ -1,10 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from utils.database import *
-from utils.help import *
+from utils.database import db, incr_database
 from utils.methods import sendFalid
 from utils.tools import add_log, regex
-from config import plugins_list, debug, send_falid_plugin, dev_mode
+from config import plugins_list, debug, send_falid_plugin, dev_mode, admins
 from objectjson import ObjectJSON
 from importlib import import_module as import_plugin
 import threading
@@ -32,9 +31,28 @@ class run_plugin(threading.Thread):
 			for patt in res.patterns:
 				matches = regex(patt, self.msg_text)
 				if matches:
+					if 'admin_plugin' in res.config:
+						if res.config['admin_plugin']:
+							if self.chat_id == admins[self.bot_type]:
+								add_log('Safe user' + str(self.chat_id),
+									'Admin Plugin'
+								)
 					self.plugin = plugin
 					self.matches = matches
 					self.trigger = patt
+
+					# Status
+					incr_database(table='status', name='allbot_usage')
+					incr_database(table='status',
+						name=str('bot_usage:' + self.bot_type)
+					)
+					incr_database(table='status',
+						name=str('plugin_usage:' + plugin)
+					)
+					if self.bot_type == 'telegram-inline':
+						incr_database(table='status',
+							name=str('inline_usage')
+						)
 
 					if self.debug:
 						add_log('{cmd} - {plugin}: {text} '.format(
@@ -74,7 +92,7 @@ def start_bot(type_bot):
 			msg_text = input('Say: /')
 			start_plugin(
 				msg_text = str('/' + msg_text),
-				chat_id = 12345,
+				chat_id = 123456,
 				bot_type = 'cli'
 			)
 		#Telegram
