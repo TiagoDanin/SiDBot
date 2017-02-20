@@ -12,7 +12,7 @@ class sid(threading.Thread):
 
 	def run(self):
 		try:
-			add_log(type_bot, 'Start Bot ' + type_bot, True, True)
+			add_log(self.type_bot, 'Start Bot ' + self.type_bot, True, True)
 			bot.start_bot(type_bot)
 		except Exception as err:
 			add_log(err, 'Stop Bot', True, True)

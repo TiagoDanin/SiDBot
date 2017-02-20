@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from utils.database import db, incr_database
+from utils.database import *
+from config import plugins_list, debug, send_falid_plugin, dev_mode
+from config import admins, defaut_lang
 from utils.methods import sendFalid
 from utils.tools import add_log, regex
-from config import plugins_list, debug, send_falid_plugin, dev_mode, admins
+from utils.languages import get_user_lang
 from objectjson import ObjectJSON
 from importlib import import_module as import_plugin
 import threading
-
-add_log('Bot....',
-		'Bot Run!', True)
 
 class run_plugin(threading.Thread):
 	def __init__(self, msg_text, chat_id, bot_type):
@@ -17,6 +16,7 @@ class run_plugin(threading.Thread):
 		self.msg_text    = msg_text
 		self.chat_id 	 = chat_id
 		self.bot_type    = bot_type
+		self.user_lang   = defaut_lang
 		if debug:
 			#I need some privacy here ;-;
 			self.debug = debug
@@ -53,6 +53,9 @@ class run_plugin(threading.Thread):
 						incr_database(table='status',
 							name=str('inline_usage')
 						)
+
+					# Get user_lang
+					self.user_lang = get_user_lang(self)
 
 					if self.debug:
 						add_log('{cmd} - {plugin}: {text} '.format(

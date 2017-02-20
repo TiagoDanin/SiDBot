@@ -1,4 +1,4 @@
-#Global
+# Global
 timeout = 5
 db_id = 12
 debug = True
@@ -6,6 +6,17 @@ dev_mode = True
 print_log = True
 saved_log = False
 send_falid_plugin = True
+
+# Admins
+admins = {
+	'cli': [
+		000000,
+		123456
+	],
+	'telegram': [
+		00000
+	]
+}
 
 # Token's
 telegram_bot_token = ''
@@ -19,15 +30,12 @@ api_list = [
 	#'telegram-inline', #Need Test
 ]
 
-admins = {
-	'cli': [
-		000000,
-		123456
-	],
-	'telegram': [
-		00000
-	]
-}
+# Languages
+defaut_lang = 'en'
+languages = [
+	'en',
+	'pt'
+]
 
 # Plugin's
 plugins_list = [
