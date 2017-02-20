@@ -1,7 +1,7 @@
-from utils.languages import _
+from utils.languages import * #Need fix :) from utils.languages import _
 from bindings.cli import show_terminal, check_debug_in_cli
-import PythonColorize as ct
 #from bindings.telegram import *
+import PythonColorize as ct
 
 def sendText(self, title=None, text=None):
 	# *Title*

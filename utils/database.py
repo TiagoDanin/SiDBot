@@ -1,5 +1,5 @@
-import dataset
 from config import db_id
+import dataset
 
 hash = 'bot:{}'.format(str(db_id))
 

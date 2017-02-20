@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from utils.database import *
 from config import plugins_list, debug, send_falid_plugin, dev_mode
 from config import admins, defaut_lang
+from utils.database import incr_database
+from utils.languages import get_user_lang
 from utils.methods import sendFalid
 from utils.tools import add_log, regex
-from utils.languages import get_user_lang
 from objectjson import ObjectJSON
 from importlib import import_module as import_plugin
 import threading

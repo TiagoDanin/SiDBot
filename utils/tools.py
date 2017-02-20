@@ -1,6 +1,6 @@
-from config import *
-from PythonColorize import *
+from config import print_log
 from utils.methods import sendLog
+from PythonColorize import *
 import datetime
 import re
 

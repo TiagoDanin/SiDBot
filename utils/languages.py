@@ -1,7 +1,7 @@
-#from utils.tools import add_log
-from importlib import import_module as import_lang
-from utils.database import *
 from config import defaut_lang
+from utils.database import db, hash
+from utils.tools import add_log
+from importlib import import_module as import_lang
 
 def get_user_lang(self):
 	db = dataset.connect('sqlite:///database:' + hash)
@@ -37,7 +37,7 @@ def new_str(self, text):
 	f = open('languages/{lang}.py'.format(lang=self.user_lang), 'w')
 	f.write(new_text)
 	f.close()
-	#add_log('New text in lang-{}'.format(self.user_lang), 'Languages')
+	add_log('New text in lang-{}'.format(self.user_lang), 'Languages')
 	return
 
 def get_str(self, text):

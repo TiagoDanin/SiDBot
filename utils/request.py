@@ -1,13 +1,11 @@
-from objectjson import ObjectJSON
+from config import timeout, telegram_bot_token, telegram_or_pwrtelegram
 from utils.tools import add_log
-import config
 import requests
+from objectjson import ObjectJSON
 
-timeout = config.timeout
-telegram_bot_token = config.telegram_bot_token
 telegram = 'https://api.telegram.org/bot{token}/'.format(token=telegram_bot_token)
 pwrtelegram = 'https://api.pwrtelegram.xyz/bot{token}/'.format(token=telegram_bot_token) #- http://pwrtelegram.xyz/ -#
-if config.telegram_or_pwrtelegram == 'pwrtelegram':
+if telegram_or_pwrtelegram == 'pwrtelegram':
 	telegram = pwrtelegram
 
 def request_url(url, type=None, params=None, headers=None, auth=None, files=None, setime=None):

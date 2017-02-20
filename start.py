@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8
 import bot
-from utils.tools import add_log, regex
 from config import api_list
+from utils.tools import add_log, regex
 import threading
 
 class sid(threading.Thread):
