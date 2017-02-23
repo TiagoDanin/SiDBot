@@ -11,6 +11,7 @@ config = {
 from utils.methods import sendResults
 from utils.database import *
 from config import plugins_list
+import dataset
 
 def get_status(input):
 	db = dataset.connect('sqlite:///database:' + hash)

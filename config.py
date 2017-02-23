@@ -15,8 +15,15 @@ admins = {
 	],
 	'telegram': [
 		00000
+	],
+	'web': [
+		00000
 	]
 }
+
+# Web
+port = 5000
+host = '0.0.0.0'
 
 # Token's
 telegram_bot_token = ''
@@ -28,6 +35,7 @@ api_list = [
 	#'telegram', #Need Test
 	#'telegram-classic', #Need Test
 	#'telegram-inline', #Need Test
+	#'web-api',
 ]
 
 # Languages

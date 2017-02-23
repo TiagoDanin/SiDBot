@@ -2,6 +2,7 @@ from config import defaut_lang
 from utils.database import db, hash
 from utils.tools import add_log
 from importlib import import_module as import_lang
+import dataset
 
 def get_user_lang(self):
 	db = dataset.connect('sqlite:///database:' + hash)

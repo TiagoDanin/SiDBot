@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from config import plugins_list, debug, send_falid_plugin, dev_mode
-from config import admins, defaut_lang
+from config import admins, defaut_lang, port, host
 from utils.database import incr_database
 from utils.languages import get_user_lang
 from utils.methods import sendFalid
 from utils.tools import add_log, regex
 from objectjson import ObjectJSON
+from flask import Flask, request, make_response
 from importlib import import_module as import_plugin
+from json import dumps as json_dumps
 import threading
-
 class run_plugin(threading.Thread):
 	def __init__(self, msg_text, chat_id, bot_type):
 		threading.Thread.__init__(self)
@@ -157,3 +158,20 @@ def start_bot(type_bot):
 								)
 				else:
 					add_log('Failed getUpdates', 'Error in bot!')
+		# Web API
+		# SOON
+		if type_bot == 'web-api':
+			app = Flask(__name__)
+			def index():
+				start_plugin(
+					msg_text = str('/' + request.args['msg_text']),
+					chat_id = int(request.args['chat_id']),
+					bot_type = 'web-api'
+				)
+				res = json_dumps({'tiago': 'danin'}, indent=4)
+				r = make_response(res)
+				r.headers['Content-Type'] = 'application/json'
+				return r
+
+			app.add_url_rule('/', 'Index', index, methods=['GET'])
+			app.run(host=host, port=port, debug=False)
