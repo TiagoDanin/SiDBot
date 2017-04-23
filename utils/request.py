@@ -24,14 +24,22 @@ def request_url(url, type=None, params=None, headers=None, auth=None, files=None
 		add_log('Error in request! {}\n{}\n\n{}'.format(url, params, data.text), 'Request', True)
 	return False
 
-def request_post(url, params=None, headers=None, data=None):
-        data = requests.post(url, params=params, headers=headers, data=data)
-        if data.status_code != 200:
-		#add_log(data.status_code)
-		#add_log(data.text)
-		add_log("OK")
-		return
-		
+def request_post(url, type=None, params=None, data=None, headers=None, auth=None, files=None, setime=None):
+		time = timeout
+		if setime:
+			time = setime
+		try:
+			data = requests.get(url, params=params, data=data, headers=headers, auth=auth, files=files, timeout=time)
+		except Exception as error:
+			add_log(str(error) + '\nURL: ' + str(url), 'Request-Except', True)
+			return False
+
+		if data.status_code == 200:
+			return data
+		else:
+			add_log('Error in request post! {}\n{}\n\n{}'.format(url, params, data.text), 'Request', True)
+		return False
+
 def request_file():
 	#SOON
 	return
