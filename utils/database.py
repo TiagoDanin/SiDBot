@@ -1,9 +1,9 @@
 from config import db_id
 import dataset
 
-hash = 'bot:{}'.format(str(db_id))
+hash = 'bot{}'.format(str(db_id))
 
-db = dataset.connect('sqlite:///database:' + hash)
+db = dataset.connect('sqlite:///database' + hash)
 
 # table = db['bot']
 #table.insert(dict(name='John Doe', age=37))
@@ -24,4 +24,4 @@ def incr_database(table=None, name=None):
 		a = dict(name=name, value=new)
 		table.update(a, ['name'])
 		return new
-	return False
+	return Falseacpi -V

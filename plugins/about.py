@@ -40,7 +40,7 @@ def run(self, input, matches):
 			more_about='Author IMAN\n'\
 				'Licensed in AGPLv3',
 			title_url='Github:'
-			url='http://github.com/SEEDTEAM/jack-telegram-bot',
+			url='http://github.com/Imandaneshi/jack-telegram-bot',
 			img=False
 		)
 		return

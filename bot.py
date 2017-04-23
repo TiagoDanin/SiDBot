@@ -11,6 +11,7 @@ from flask import Flask, request, make_response
 from importlib import import_module as import_plugin
 from json import dumps as json_dumps
 import threading
+
 class run_plugin(threading.Thread):
 	def __init__(self, msg_text, chat_id, bot_type):
 		threading.Thread.__init__(self)
