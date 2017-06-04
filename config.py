@@ -32,9 +32,9 @@ telegram_or_pwrtelegram = 'pwrtelegram'
 # API's
 api_list = [
 	'cli',
-	#'telegram', #Need Test
-	#'telegram-classic', #Need Test
-	#'telegram-inline', #Need Test
+	'telegram',
+	#'telegram-classic',
+	#'telegram-inline',
 	#'web-api',
 ]
 

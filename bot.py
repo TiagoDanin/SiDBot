@@ -2,15 +2,17 @@
 # -*- coding:utf-8 -*-
 from config import plugins_list, debug, send_falid_plugin, dev_mode
 from config import admins, defaut_lang, port, host
-from utils.database import incr_database
-from utils.languages import get_user_lang
-from utils.methods import sendFalid
-from utils.tools import add_log, regex
+from utils.database import *
+from utils.languages import *
+from utils.methods import *
+from utils.tools import *
+from bindings.telegram import getUpdates
 from objectjson import ObjectJSON
 from flask import Flask, request, make_response
 from importlib import import_module as import_plugin
 from json import dumps as json_dumps
 import threading
+import time
 
 class run_plugin(threading.Thread):
 	def __init__(self, msg_text, chat_id, bot_type):
@@ -91,6 +93,7 @@ def start_plugin(msg_text, chat_id, bot_type):
 		)
 
 def start_bot(type_bot):
+	update_id_tg = 0
 	while True:
 		#CLI
 		if type_bot == 'cli':
@@ -101,64 +104,30 @@ def start_bot(type_bot):
 				bot_type = 'cli'
 			)
 		#Telegram
-		if type_bot == 'telegram':
-			update_id = 0
-			_, result = getUpdates(offset=update_id + 1)
+		if type_bot == 'telegram' or type_bot == 'telegram-classic' or type_bot == 'telegram-inline':
+			_, result = getUpdates(offset=update_id_tg)
 			if result:
 				for msg in result['result']:
-					update_id = msg['update_id']
+					update_id_tg = msg['update_id']
+					update_id_tg += 1
 					if 'message' in msg:
-						if 'text' in msg['message']:
-							if 'chat' in msg['message']:
-								start_plugin(
-									msg_text = str(msg.message.text),
-									chat_id = int(msg.message.chat.id),
-									bot_type = 'telegram'
-								)
+						if type_bot == 'telegram-classic' or type_bot == 'telegram':
+							if 'text' in msg['message']:
+								if 'chat' in msg['message']:
+									start_plugin(
+										msg_text = str(msg['message']['text']),
+										chat_id = int(msg['message']['chat']['id']),
+										bot_type = 'telegram'
+									)
 					if 'inline_query' in msg:
-						if 'query' in msg['inline_query']:
-							if 'id' in msg['inline_query']:
-								start_plugin(
-									msg_text = str('/' + msg.inline_query.query),
-									chat_id = int(msg.inline_query.id),
-									bot_type = 'telegram-inline'
-								)
-				else:
-					add_log('Failed getUpdates', 'Error in bot!')
-		#Telegram-Classic
-		if type_bot == 'telegram-classic':
-			update_id = 0
-			_, result = getUpdates(offset=update_id + 1)
-			if result:
-				for msg in result['result']:
-					update_id = msg['update_id']
-					if 'message' in msg:
-						if 'text' in msg['message']:
-							if 'chat' in msg['message']:
-								start_plugin(
-									msg_text = str(msg.message.text),
-									chat_id = int(msg.message.chat.id),
-									bot_type = 'telegram'
-								)
-				else:
-					add_log('Failed getUpdates', 'Error in bot!')
-		#Telegram-Inline
-		if type_bot == 'telegram-inline':
-			update_id = 0
-			_, result = getUpdates(offset=update_id + 1)
-			if result:
-				for msg in result['result']:
-					update_id = msg['update_id']
-					if 'inline_query' in msg:
-						if 'query' in msg['inline_query']:
-							if 'id' in msg['inline_query']:
-								start_plugin(
-									msg_text = str('/' + msg.inline_query.query),
-									chat_id = int(msg.inline_query.id),
-									bot_type = 'telegram-inline'
-								)
-				else:
-					add_log('Failed getUpdates', 'Error in bot!')
+						if type_bot == 'telegram-inline' or type_bot == 'telegram':
+							if 'query' in msg['inline_query']:
+								if 'id' in msg['inline_query']:
+									start_plugin(
+										msg_text = str('/' + msg['inline_query']['query']),
+										chat_id = int(msg['inline_query']['id']),
+										bot_type = 'telegram-inline'
+									)
 		# Web API
 		# SOON
 		if type_bot == 'web-api':

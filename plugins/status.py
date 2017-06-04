@@ -14,7 +14,7 @@ from config import plugins_list
 import dataset
 
 def get_status(input):
-	db = dataset.connect('sqlite:///database:' + hash)
+	db = dataset.connect('sqlite:///db' + hash)
 	table = db['status']
 	r = table.find_one(name=input)
 	if r == None:
