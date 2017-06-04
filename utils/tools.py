@@ -1,5 +1,5 @@
 from config import print_log
-from utils.methods import sendLog
+from utils.methods import *
 from PythonColorize import *
 import datetime
 import re

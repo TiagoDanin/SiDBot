@@ -3,7 +3,7 @@ import dataset
 
 hash = 'bot{}'.format(str(db_id))
 
-db = dataset.connect('sqlite:///database' + hash)
+db = dataset.connect('sqlite:///db' + hash)
 
 # table = db['bot']
 #table.insert(dict(name='John Doe', age=37))
@@ -12,7 +12,7 @@ db = dataset.connect('sqlite:///database' + hash)
 #john = table.find_one(name='John Doe')
 
 def incr_database(table=None, name=None):
-	db = dataset.connect('sqlite:///database:' + hash)
+	db = dataset.connect('sqlite:///db' + hash)
 	if table and name:
 		table = db[table]
 		r = table.find_one(name=name)

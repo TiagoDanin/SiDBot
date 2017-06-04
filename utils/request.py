@@ -1,5 +1,5 @@
 from config import timeout, telegram_bot_token, telegram_or_pwrtelegram
-from utils.tools import add_log
+from utils.tools import *
 import requests
 from objectjson import ObjectJSON
 

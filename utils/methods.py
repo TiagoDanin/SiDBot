@@ -1,6 +1,6 @@
-from utils.languages import * #Need fix :) from utils.languages import _
+from utils.languages import *
 from bindings.cli import show_terminal, check_debug_in_cli
-#from bindings.telegram import *
+from bindings.telegram import sendMessage
 import PythonColorize as ct
 
 def sendText(self, title=None, text=None):
@@ -14,13 +14,22 @@ def sendText(self, title=None, text=None):
 	if self.bot_type == 'cli':
 		check_debug_in_cli(self)
 		show_terminal('{bold}{title}{rest}\n{text}'.format(
-						bold=ct.colors.lg_bold_white,
-						title=title,
-						rest=ct.colors.nocolor,
-						text=text
+								bold=ct.colors.lg_bold_white,
+								title=title,
+								rest=ct.colors.nocolor,
+								text=text
 							)
 						)
 		return True
+
+	if self.bot_type == 'telegram':
+		return sendMessage(chat_id=self.chat_id,
+							text='*{title}*\n{text}'.format(
+								title=title,
+								text=text
+							),
+							parse_mode='Markdown'
+						)
 	return False
 
 def sendAbout(self, title=None, about=None, more_about=None, title_url=None, url=None, img=None):
