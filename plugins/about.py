@@ -25,33 +25,33 @@ def run(self, input, matches):
 				'/about otouto - About project Otouto'
 				'List of contributors:\n'\
 				'/contributors sid - Contributors of SIDBot\n'\
-				'/contributors translation - Contributors of translation'
+				'/contributors translation - Contributors of translation',
 			more_about=False,
-			title_url='Github:'
+			title_url='Github',
 			url='http://github.com/TiagoDanin/SiDBot',
 			img=False
 		)
 		return
 
-	if input == 'jack'
+	if input == 'jack':
 		sendAbout(self,
 			title='About Jack',
 			about='Jack is a multi purpose Telegram bot',
 			more_about='Author IMAN\n'\
 				'Licensed in AGPLv3',
-			title_url='Github:'
+			title_url='Github',
 			url='http://github.com/Imandaneshi/jack-telegram-bot',
 			img=False
 		)
 		return
 
-	if input == 'otouto'
+	if input == 'otouto':
 		sendAbout(self,
 			title='About Otouto',
 			about='I am otouto, the plugin-wielding, multipurpose Telegram bot.',
 			more_about='Author Topkecleon\n'\
 				'Licensed in AGPLv3',
-			title_url='Github:'
+			title_url='Github',
 			url='http://github.com/topkecleon/otouto',
 			img=False
 		)

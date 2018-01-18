@@ -26,15 +26,15 @@ port = 5000
 host = '0.0.0.0'
 
 # Token's
-telegram_bot_token = ''
+telegram_bot_token = '165770307:AAEpj3nKXcCykXsLhop_Eknh4YtC9xUbuy4'
 telegram_or_pwrtelegram = 'pwrtelegram'
 
 # API's
 api_list = [
-	'cli',
-	'telegram',
-	#'telegram-classic',
-	#'telegram-inline',
+	#'cli',
+	'telegram', #Need Test
+	#'telegram-classic', #Need Test
+	#'telegram-inline', #Need Test
 	#'web-api',
 ]
 
@@ -47,6 +47,7 @@ languages = [
 
 # Plugin's
 plugins_list = [
+	'about',
 	#'calculator',
 	#'download',
 	'echo',

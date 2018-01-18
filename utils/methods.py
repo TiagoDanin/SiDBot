@@ -78,6 +78,42 @@ def sendAbout(self, title=None, about=None, more_about=None, title_url=None, url
 				text_url=text_url
 			)
 		)
+		# [hack_img](img)
+		# *Title*
+		# about
+		# _more_about_
+		# title_url: url
+	if self.bot_type == 'telegram':
+		if img:
+			img_text = str('IMG URL:' + img + '\n')
+		else:
+			img_text = ''
+
+		if title_url and url:
+			text_url = str('URL: [' + title_url + '](' + url + ')')
+		elif url:
+			text_url = str('URL: [here](' + url + ')')
+		else:
+			text_url = ''
+
+		return sendMessage(chat_id=self.chat_id,
+							text='{img_text}'\
+								'{bold}{title}{bold}\n'\
+								'{about}\n'\
+								'{sub}{more_about}{sub}'\
+								'{text_url}'\
+								.format(
+									img_text=img_text,
+									bold='*',
+									title=title,
+									rest=ct.colors.nocolor,
+									about=about,
+									sub='```',
+									more_about=more_about,
+									text_url=text_url
+								),
+							parse_mode='Markdown'
+						)
 	return False
 
 def sendResults(self, title=None, text=None, results=None):

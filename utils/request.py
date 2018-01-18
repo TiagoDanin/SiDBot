@@ -18,7 +18,7 @@ def request_url(url, type=None, params=None, headers=None, auth=None, files=None
 		else:
 			data = requests.get(url, params=params, headers=headers, auth=auth, files=files, timeout=time)
 	except Exception as error:
-		add_log(str(error) + '\nURL: ' + str(url), 'Request-Except', True)
+		print(error)
 		return False
 
 	if data.status_code == 200:
